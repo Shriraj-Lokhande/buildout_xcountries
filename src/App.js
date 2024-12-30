@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error(`HTTP error! Status: ${res.status}`);
         }
         return res.json();
       })
@@ -20,7 +20,7 @@ export default function App() {
       })
       .catch((err) => {
         console.error("Error fetching data: ", err);
-        setError("Failed to load countries. Please try again later.");
+        setError(true);
         setLoading(false);
       });
   }, []);
@@ -30,8 +30,7 @@ export default function App() {
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "100vh",
-    padding: "20px",
+    height: "100vh",
   };
 
   const cardStyle = {
@@ -44,35 +43,35 @@ export default function App() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
   };
 
   const imageStyle = {
     width: "100px",
     height: "100px",
-    objectFit: "contain",
   };
 
   if (loading) {
-    return <div style={{ textAlign: "center", marginTop: "20px" }}>Loading countries...</div>;
+    return <h2>Loading countries...</h2>;
   }
 
   if (error) {
-    return <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>{error}</div>;
+    return <h2>Failed to load countries. Please try again later.</h2>;
   }
 
   return (
     <div style={containerStyle}>
-      {countries.map((country) => (
-        <div key={country.cca3} style={cardStyle}>
-          <img
-            src={country.flags.png}
-            alt={`Flag of ${country.name.common}`}
-            style={imageStyle}
-          />
-          <h2>{country.name.common}</h2>
-        </div>
-      ))}
+      {countries.map((country) => {
+        return (
+          <div key={country.cca3} style={cardStyle} className="countryCard">
+            <img
+              src={country.flags.png}
+              alt={`Flag of ${country.name.common}`}
+              style={imageStyle}
+            />
+            <h2>{country.name.common}</h2>
+          </div>
+        );
+      })}
     </div>
   );
 }
