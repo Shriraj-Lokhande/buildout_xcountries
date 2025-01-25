@@ -28,7 +28,7 @@ export default function App() {
 const fetchApi = async () => {
     try {
       const res = await axios.get(
-        `https://xcountries-backend.azurewebsites.net/all`
+        `https://restcountries.com/v3.1/all`
       );
 
       // console.log(res.data);
