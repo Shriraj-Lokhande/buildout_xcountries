@@ -78,28 +78,28 @@ const fetchApi = async () => {
 
   return (
     <div style={containerStyle}>
-      {countries.map((country) => {
-        return (
+      {/* {countries.map((country) => { */}
+         {/* return (
           // <div key={country.cca3} style={cardStyle} className="countryCard">
-          //   <img
-          //     src={country.flags.png}
+          //   <img */}
+          {/* //     src={country.flags.png}
           //     alt={`Flag of ${country.name.common}`}
           //     style={imageStyle}
           //   />
           //   <h2>{country.name.common}</h2>
-          // </div>
-          <div className="countryCard">
-            {country.map((element, index) => {
+          // </div> */}
+          {/* // <div className="countryCard"> */}
+            {countries.map((element, index) => {
               return (
-                <div className="card" key={index}>
+                <div className="countryCard" key={index}>
                   <img src={element.flag} alt={element.abbr} style={imageStyle}/>
                   <p>{element.name}</p>
                 </div>
               );
             })}
-          </div>
-        );
-      })}
+          {/* </div> */}
+        {/* );
+      })} */}
     </div>
   );
 }
