@@ -6,23 +6,39 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  // useEffect(() => {
+    // fetch("https://restcountries.com/v3.1/all")
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       throw new Error(`HTTP error! Status: ${res.status}`);
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     setCountries(data);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.error("Error fetching data: ", err);
+    //     setError(true);
+    //     setLoading(false);
+    //   });
+  // }, []);
+
+const fetchApi = async () => {
+    try {
+      const res = await axios.get(
+        `https://xcountries-backend.azurewebsites.net/all`
+      );
+
+      // console.log(res.data);
+      setData(res.data);
+    } catch (e) {
+      console.error(`Error fetching data:${e}`);
+    }
+  };
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setCountries(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching data: ", err);
-        setError(true);
-        setLoading(false);
-      });
+    fetchApi();
   }, []);
 
   const containerStyle = {
