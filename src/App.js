@@ -28,7 +28,7 @@ export default function App() {
 const fetchApi = async () => {
     try {
       const res = await axios.get(
-        `https://restcountries.com/v3.1/all`
+        `https://xcountries-backend.azurewebsites.net/all`
       );
 
       // console.log(res.data);
@@ -78,13 +78,23 @@ const fetchApi = async () => {
     <div style={containerStyle}>
       {countries.map((country) => {
         return (
-          <div key={country.cca3} style={cardStyle} className="countryCard">
-            <img
-              src={country.flags.png}
-              alt={`Flag of ${country.name.common}`}
-              style={imageStyle}
-            />
-            <h2>{country.name.common}</h2>
+          // <div key={country.cca3} style={cardStyle} className="countryCard">
+          //   <img
+          //     src={country.flags.png}
+          //     alt={`Flag of ${country.name.common}`}
+          //     style={imageStyle}
+          //   />
+          //   <h2>{country.name.common}</h2>
+          // </div>
+          <div className="main">
+            {country.map((element, index) => {
+              return (
+                <div className="card" key={index}>
+                  <img src={element.flag} alt={element.abbr} />
+                  <p>{element.name}</p>
+                </div>
+              );
+            })}
           </div>
         );
       })}
