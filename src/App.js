@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-
+import axios from 'axios';
 export default function App() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ const fetchApi = async () => {
       );
 
       // console.log(res.data);
-      setData(res.data);
+      setCountries(res.data);
     } catch (e) {
       console.error(`Error fetching data:${e}`);
     }
