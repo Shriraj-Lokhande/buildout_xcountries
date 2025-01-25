@@ -86,11 +86,11 @@ const fetchApi = async () => {
           //   />
           //   <h2>{country.name.common}</h2>
           // </div>
-          <div className="main">
+          <div className="countryCard">
             {country.map((element, index) => {
               return (
                 <div className="card" key={index}>
-                  <img src={element.flag} alt={element.abbr} />
+                  <img src={element.flag} alt={element.abbr} style={imageStyle}/>
                   <p>{element.name}</p>
                 </div>
               );
