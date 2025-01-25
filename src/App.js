@@ -32,9 +32,11 @@ const fetchApi = async () => {
       );
 
       // console.log(res.data);
+      setLoading(false);
       setCountries(res.data);
     } catch (e) {
       console.error(`Error fetching data:${e}`);
+      setLoading(false);
     }
   };
   useEffect(() => {
